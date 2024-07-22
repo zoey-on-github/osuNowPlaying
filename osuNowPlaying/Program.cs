@@ -11,6 +11,7 @@ class Program {
                     string newOsuSong = process.MainWindowTitle.Substring(process.MainWindowTitle.IndexOf("-") + 1);
                 if (oldOsuSong != newOsuSong && newOsuSong.Contains("-")) {
                     Console.WriteLine(newOsuSong);
+                    File.WriteAllText("C:/stream stuff/osuNowPlaying.txt", newOsuSong);
                     oldOsuSong = newOsuSong;
                 }
             }
