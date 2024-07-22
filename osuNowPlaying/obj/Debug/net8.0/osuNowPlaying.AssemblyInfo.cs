@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("osuNowPlaying")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+391757200692febda6ab99356a789af1d9ae78ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+242761ee4fc8809573a490041289f76647c07aeb")]
 [assembly: System.Reflection.AssemblyProductAttribute("osuNowPlaying")]
 [assembly: System.Reflection.AssemblyTitleAttribute("osuNowPlaying")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
