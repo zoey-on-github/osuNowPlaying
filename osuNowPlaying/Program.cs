@@ -1,31 +1,28 @@
-﻿using System.Net.Mime;
+﻿using System.Diagnostics;
 
-namespace osuNowPlaying;
-using System.Diagnostics;
-using System.Management;
-using System.IO;
-[System.Runtime.Versioning.SupportedOSPlatform("windows")]
-class Program {
-    static void Main(string[] args)
-    {
-        if (!File.Exists("path.txt"))
-        {
-            FileStream ConfigFile = new FileStream("path.txt", FileMode.CreateNew);
-        }
-        //var configFile = File.Create("path.txt");
-        //configFile.Close();
-        string pathToConfigFile = File.ReadAllText("path.txt");
-        string oldOsuSong = String.Empty;
-        while (true) {
-            Process[] osu = Process.GetProcessesByName("osu!");
-            foreach (Process process in osu) {
-                    string newOsuSong = process.MainWindowTitle.Substring(process.MainWindowTitle.IndexOf("-") + 1);
-                if (oldOsuSong != newOsuSong && newOsuSong.Contains("-")) {
-                    Console.WriteLine(newOsuSong);
-                    File.WriteAllText(pathToConfigFile, newOsuSong);
-                    oldOsuSong = newOsuSong;
+public class osuNowPlaying {
+    const string OUTPUT_FILE = "output.txt";
+    const string WAITING_TEXT = "Waiting for next song...";
+
+    public static void Main(string[] args) {
+        string lastProcessName = string.Empty;
+        string currentProcessName = string.Empty;
+
+        while(true) {
+            Process[] processList = Process.GetProcessesByName("osu!");
+
+            if (processList.Length > 0) {
+                currentProcessName = processList[0].MainWindowTitle;
+                if (currentProcessName != lastProcessName) {
+                    string songName = currentProcessName[(currentProcessName.IndexOf('-') + 1)..].Trim();
+                    string outputContents = currentProcessName.Contains('-') ? songName : WAITING_TEXT;
+                    using StreamWriter sw = new(OUTPUT_FILE);
+                    sw.WriteLine(outputContents);
+                    lastProcessName = currentProcessName;
                 }
-            }
+            } // this could be an else statement to capture errors about osu not being open
+
+            Thread.Sleep(1000);
         }
     }
 }
