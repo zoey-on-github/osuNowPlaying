@@ -18,6 +18,7 @@ public class osuNowPlaying {
                     string outputContents = currentProcessName.Contains('-') ? songName : WAITING_TEXT;
                     using StreamWriter sw = new(OUTPUT_FILE);
                     sw.WriteLine(outputContents);
+                    Console.Write(outputContents);
                     lastProcessName = currentProcessName;
                 }
             } // this could be an else statement to capture errors about osu not being open
