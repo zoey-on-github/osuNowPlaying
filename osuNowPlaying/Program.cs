@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 
 public class osuNowPlaying {
-    const string OUTPUT_FILE = "output.txt";
+    const string OUTPUT_FILE = "output.html";
     const string WAITING_TEXT = "Waiting for next song...";
 
     public static void Main(string[] args) {
@@ -17,7 +17,7 @@ public class osuNowPlaying {
                     string songName = currentProcessName[(currentProcessName.IndexOf('-') + 1)..].Trim();
                     string outputContents = currentProcessName.Contains('-') ? songName : WAITING_TEXT;
                     using StreamWriter sw = new(OUTPUT_FILE);
-                    sw.WriteLine(outputContents);
+                    sw.WriteLine("<h1>" + outputContents + "</h1>");
                     Console.Write(outputContents);
                     lastProcessName = currentProcessName;
                 }
